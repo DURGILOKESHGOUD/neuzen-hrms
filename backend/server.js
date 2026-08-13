@@ -28,7 +28,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use(cors())
+// app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
@@ -49,7 +49,15 @@ app.use('/api/calendar', calendarRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`[SERVER] NEUZEN AI HRMS API running on port ${PORT}`));
+// const PORT = process.env.PORT || 5000;
+// app.listen(PORT, () => console.log(`[SERVER] NEUZEN AI HRMS API running on port ${PORT}`));
 
+// module.exports = app;
 module.exports = app;
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`[SERVER] NEUZEN AI HRMS API running on port ${PORT}`);
+  });
+}
